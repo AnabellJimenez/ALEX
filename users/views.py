@@ -41,9 +41,10 @@ def verify(request):
 	if user is not None:
 		if user.is_active:
 			login(request, user)#use the login imported method to verify the user
-			print "logged in"
-			#allow user to access member only page
-			return render(request,'users/home.html') 
+			if request.user.is_authenticated():
+				print "authenticate"
+				#allow user to access member only page
+				return render(request,'users/home.html') 
 		else: 
 			return HttpResponse("ACCOUNT ERROR")
 	else:
@@ -53,12 +54,13 @@ def verify(request):
 def index(request):
 	return render(request, 'users/index.html')
 
-#HOME METHOD ALLOWS MEMBERS ACCESS IF THEY ARE VALID USERS
-def home(request):
-	#print request.user #CODE FOR TESTING 
+# #HOME METHOD ALLOWS MEMBERS ACCESS IF THEY ARE VALID USERS
+# def home(request):
+# 	#print request.user #CODE FOR TESTING 
 
-	if request.user.is_authenticated():
-		return render(request, 'users/home.html')
-	else:
-		return HttpResponse("CANNOT ACCESS PAGE")
+# 	if request.user.is_authenticated():
+# 		return render(request, 'users/home.html')
+# 	else:
+# 		return HttpResponse("CANNOT ACCESS PAGE")
+
 
