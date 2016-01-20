@@ -43,7 +43,7 @@ def verify(request):
 			login(request, user)#use the login imported method to verify the user
 			print "logged in"
 			#allow user to access member only page
-			return HttpResponseRedirect(reverse('users:home')) 
+			return render(request,'users/home.html') 
 		else: 
 			return HttpResponse("ACCOUNT ERROR")
 	else:
